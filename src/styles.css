@@ -1,0 +1,60 @@
+html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+.container {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+}
+.btn {
+    display: block;
+    width: 90%;
+    padding: 10px;
+    margin: 10px auto 0 auto;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.wrap-todo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+}
+.pending {
+    font-size: 18px;
+}
+.data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-todo input {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    padding: 8px 5px;
+}
+.wrap-btn {
+    
+}
+.btn-success {
+    background-color: rgb(5, 119, 119);
+    border: 1px solid aqua;
+}
+.btn-danger {
+    width: auto;
+    background-color: rgb(255, 0, 0);
+    border: 1px solid rgb(255, 0, 0);
+}
