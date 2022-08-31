@@ -29,7 +29,6 @@ body {
 .wrap-todo {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    align-items: center;
 }
 .pending {
     font-size: 18px;
@@ -39,15 +38,17 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
+.wrap-form {
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .form-todo input {
     display: block;
     width: 90%;
     margin: 0 auto;
     padding: 8px 5px;
-}
-.wrap-btn {
-    
 }
 .btn-success {
     background-color: rgb(5, 119, 119);

@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { todoReducer } from './todoReducer';
 import { TodoList } from '../../components/TodoList';
 import { TodoAdd } from '../../components/TodoAdd';
@@ -16,13 +16,32 @@ const initialState = [
     }
 ]
 
+const init = initialState => {
+  return JSON.parse(localStorage.getItem('todos')) || initialState;
+}
+
 
 export const TodoApp = () => {
 
-  const [todos, dispatch] = useReducer(todoReducer, initialState);
+  const [todos, dispatch] = useReducer(todoReducer, initialState, init);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos])
+  
 
   const handleNewTodo = todo => {
-    console.log('todo:', todo)
+    dispatch({
+      type: '[TODO] Add Todo',
+      payload: todo
+    });
+  }
+
+  const handleDeleteTodo = id => {
+    dispatch({
+      type: '[TODO] Delete Todo',
+      payload: id
+    });
   }
 
   return (
@@ -31,7 +50,7 @@ export const TodoApp = () => {
         <div className="todo">
             <h1>TODO (10), <span className="pending">Pendiente (2)</span></h1>
             <hr />
-            <TodoList todos={ todos } />
+            <TodoList todos={ todos } onDeleteTodo={ handleDeleteTodo } />
         </div>
         <div className="wrap-form">
             <TodoAdd onNewTodo={ handleNewTodo } />

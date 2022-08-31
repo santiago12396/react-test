@@ -12,7 +12,7 @@ export const TodoAdd = ({ onNewTodo }) => {
     event.preventDefault();
     if(inputValue.trim().length === 0) return;
     onNewTodo({
-        id: new Date().getTime() * 3,
+        id: new Date().getTime(),
         description: inputValue.trim(),
         done: false
     });
