@@ -1,56 +1,19 @@
-import { useEffect, useReducer } from 'react';
-import { todoReducer } from './todoReducer';
-import { TodoList } from '../../components/TodoList';
-import { TodoAdd } from '../../components/TodoAdd';
+import { TodoList } from './TodoList';
+import { TodoAdd } from './TodoAdd';
 
-const initialState = [
-    {
-        id: new Date().getTime(),
-        description: 'Desc 1',
-        done: false
-    },
-    {
-        id: new Date().getTime() * 3,
-        description: 'Desc 2',
-        done: false
-    }
-]
-
-const init = initialState => {
-  return JSON.parse(localStorage.getItem('todos')) || initialState;
-}
-
+import { useTodos } from './useTodos';
 
 export const TodoApp = () => {
 
-  const [todos, dispatch] = useReducer(todoReducer, initialState, init);
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos])
-  
-
-  const handleNewTodo = todo => {
-    dispatch({
-      type: '[TODO] Add Todo',
-      payload: todo
-    });
-  }
-
-  const handleDeleteTodo = id => {
-    dispatch({
-      type: '[TODO] Delete Todo',
-      payload: id
-    });
-  }
+  const { todos, todosCount, pendingTodosCount, handleNewTodo, handleDeleteTodo, handleToggleTodo } = useTodos([]);
 
   return (
     <>
       <div className="container wrap-todo">
         <div className="todo">
-            <h1>TODO (10), <span className="pending">Pendiente (2)</span></h1>
+            <h1>TODO ({todosCount()}), <span className="pending">Pendiente ({pendingTodosCount()})</span></h1>
             <hr />
-            <TodoList todos={ todos } onDeleteTodo={ handleDeleteTodo } />
+            <TodoList todos={ todos } onDeleteTodo={ handleDeleteTodo } onToggleTodo={ handleToggleTodo } />
         </div>
         <div className="wrap-form">
             <TodoAdd onNewTodo={ handleNewTodo } />
